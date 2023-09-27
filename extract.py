@@ -5,6 +5,25 @@ import fitz
 import requests
 import mistune
 from bs4 import BeautifulSoup
+import re
+
+def convert_github_url_to_raw_url(url):
+  """Converts a GitHub URL to a raw URL.
+
+  Args:
+    url: A GitHub URL.
+
+  Returns:
+    A raw URL.
+  """
+
+  # Remove the "blob/" part of the URL.
+  url = re.sub(r'/blob/', '/', url)
+
+  # Add the "raw/" part of the URL.
+  url = url.replace('github.com', 'raw.githubusercontent.com')
+
+  return url
 
 # Create a document object
 doc = fitz.open('E:\Web Scrapping\Biswatosh_Mazumder_Resume.pdf')  # or fitz.Document(filename)
@@ -23,7 +42,7 @@ for i in range(doc.page_count):
 ll=["https://github.com/rodrigomasiniai/ResumeScreeningApp","https://github.com/Biswatosh01/Construction-Site-Safety-"]
 for lnk in ll:
     github_url = lnk + "/blob/main/README.md"
-    url = github_url.replace("/blob/", "/raw/")
+    url = convert_github_url_to_raw_url(github_url)
     print("\n\nGitHub repo Content:\n\n")
 
     headers = {
