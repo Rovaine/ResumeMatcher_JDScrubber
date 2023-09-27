@@ -1,3 +1,5 @@
+# This file helps to extract the content from the Readme.md file of the GitHub project repos mentioned in the resume 
+
 # The import name for this library is fitz
 import fitz
 import requests
