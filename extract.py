@@ -49,7 +49,7 @@ for lnk in ll:
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
     }
 
-    response = requests.get(url, headers=headers)
+    response = requests.get(github_url, headers=headers)
 
     if response.status_code == 200:
         markdown_content = response.text
@@ -63,9 +63,15 @@ for lnk in ll:
 
         # Find the <p> tag with dir='auto' and extract its text
         p_tags = soup.select('p', {'dir': 'auto'})
-        info=[]
+        info1=[]
         for p_tag in p_tags:
-            info.append(p_tag.get_text())
+            info1.append(p_tag.get_text())
+        pattern = r'<p dir="auto">(.*?)<\/p>'
+        matches = re.findall(pattern, info1[0], re.DOTALL)
+        info=[]
+        # Extracted text
+        for match in matches:
+            info.append(match.strip())
         clean_info = [re.sub(r'<[^>]*>', '', item).strip() for item in info if item.strip()]
         # Define a regular expression to match emojis and symbols
         emoji_pattern = re.compile("["
@@ -88,4 +94,6 @@ for lnk in ll:
         print(info)
     else:
         print("Failed to retrieve the README file. Status code:", response.status_code)
+
+
 
