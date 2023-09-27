@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+</head>
+
+<body>
+    <h1>Candidate Selection Tool</h1>
+    <p>Aim of this project is to check whether a candidate is qualified for a role based his or her education,
+        experience, and other information captured on their resume. In a nutshell, it's a form of pattern matching
+        between a job's requirements and the qualifications of a candidate based on their resume.</p>
+        <form method="post" enctype="multipart/form-data" action="{% url 'compare_pdfs' %}">
+            {% csrf_token %}
+            <section>
+                <label for="upload_desc">Upload Job Description:</label><br>
+                <input type="file" id="upload_desc"><br>
+                <label for="upload_resume">Upload Resume:</label><br>
+                <input type="file" id="upload_resume">
+            </section>
+        </form>
+        <button id="Proceed">Proceed</button>
+        <script>
+            // JavaScript function to open another webpage
+            function openWebpage() {
+                // Specify the URL of the webpage you want to open
+                var targetUrl = 'http://127.0.0.1:8000/results'; // Replace with the desired URL
+    
+                // Redirect to the specified URL
+                window.location.href = targetUrl;
+            }
+    
+            // Attach the function to the button click event
+            var openButton = document.getElementById('Proceed');
+            Proceed.addEventListener('click', openWebpage);
+        </script>
+</body>
+
+</html>
