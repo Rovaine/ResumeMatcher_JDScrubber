@@ -2,7 +2,7 @@
 
 
 # Example usage:
-# from extract1 import extract_info_from_pdf
+# from extract import extract_info_from_pdf
 # pdf_path = 'E:\\Web Scrapping\\Biswatosh_Mazumder_Resume.pdf'
 # info_list = extract_info_from_pdf(pdf_path)
 # for info in info_list:
