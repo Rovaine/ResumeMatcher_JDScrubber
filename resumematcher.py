@@ -10,6 +10,7 @@ import os
 from huggingface_hub import hf_hub_download
 from langchain.llms import HuggingFacePipeline
 import torch
+import humaneval
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline, AutoModelForSeq2SeqLM
 
 def match_resume_to_job_description(job_description, resume):
@@ -44,6 +45,7 @@ def matcher(job_description_keywords,resume_keywords):
     
     return fitment_rating, missing_keywords
 
+
 def confidenceScore(resume_keywords, job_description_keywords):
     extra_keywords = []
     union = []
@@ -57,8 +59,9 @@ def confidenceScore(resume_keywords, job_description_keywords):
             union.append(keyword)
 
     confidence_score = (len(union)/len(extra_keywords))*100
-	print(f"confidence score = {confidence_score}")
+    print(f"confidence score = {confidence_score}")
     return confidence_score
+
 
 def read_data_from_pdf(pdf_path):
     with open(pdf_path, 'rb') as file:
@@ -97,7 +100,7 @@ pipeline = pipeline(
     max_length = 1028
 )
 local_llm = HuggingFacePipeline(pipeline=pipeline)
-
+    
 
 resume_file_path = 'barry_allen_fe.pdf'
 jd_file_path = 'sample_job_description.pdf'
@@ -115,11 +118,14 @@ if file_type == 'Word Document':
     
 elif file_type == 'PDF':
     job_description_text = read_data_from_pdf(jd_file_path)
-
+web_text = "value to be entered from web scraping function"
 job_description_keywords = local_llm(f"You are a ATS service for technical jobs. From the given job description find all the keywords that are in any way related to technology or programming languages.Only output words. Job Description: {job_description_text}.")
 resume_keywords = local_llm(f"You are a ATS service for technical jobs. From the given resume find all the keywords that are in any way related to technology or programming languages.Only output words. Job Description: {resume_text}.")
+web_keywords = local_llm(f"You are a ATS service for technical jobs. From the given text find all the keywords that are in any way related to technology or programming languages.Only output words. Job Description: {web_text}.")
+
+resume_keywords = resume_keywords + web_keywords
+
 print(job_description_keywords)
 print(resume_keywords)
 matcher(job_description_keywords, resume_keywords)
-confidenceScore(resume_keywords, job_description_keywords)
-
+print(humaneval.process_excel_sheet("excelsheet.xlsx"))
