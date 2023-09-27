@@ -1,0 +1,76 @@
+/* Reset some default browser styles */
+body, h1, p, label, input {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set a background color and font for the entire page */
+body {
+    background-color: #000000;
+    font-family: Arial, sans-serif;
+    display: flex; /* Use flexbox for vertical centering */
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Style the header */
+h1 {
+    font-size: 30px;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+/* Style the main content section */
+p {
+    font-size: 20px;
+    color: #ffffff;
+    margin-bottom: 30px;
+    width: 75%;
+}
+
+/* Style the form section */
+section {
+    background-color: #838383;
+    padding: 100px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 100px rgba(255, 255, 255, 0.2);
+}
+
+/* Style the file input elements */
+label {
+    display: block;
+    font-size: 16px;
+    color: #fffdfd;
+    margin-bottom: 10px;
+}
+
+input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+/* Style the Proceed button */
+#Proceed {
+    display: block;
+    margin-top: 2%;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 18px;
+    cursor: pointer;
+    width: 25%;
+}
+
+#Proceed:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PDF Comparison Results</title>
+    <link rel="stylesheet" type="text/css" href="/static/rs.css">
+</head>
+<body>
+    <h1>Comparison Results</h1>
+    <div class="jd">
+        <p>Job description Summary: <br> {{jd}}</p>
+    </div>
+    <div class="rs">
+        <p>Resume Summary: <br> {{rs}}</p>
+    </div>
+    {% if similarity_percentage %}
+        <p>Similarity Percentage: {{ similarity_percentage }}%</p>
+    {% else %}
+        <p>No similarity percentage available.</p>
+    {% endif %}
+    <a href="{% url 'upload_pdf' %}">Back to Upload</a>
+</body>
+</html>
