@@ -44,6 +44,22 @@ def matcher(job_description_keywords,resume_keywords):
     
     return fitment_rating, missing_keywords
 
+def confidenceScore(resume_keywords, job_description_keywords):
+    extra_keywords = []
+    union = []
+    skills = ['Communicate', 'Team', 'Solve', 'Lead', 'Manage', 'Adapt', 'Interpersonal', 'Create', 'Organize', 'Work', 'Stress', 'Tech', 'Serve', 'Finance', 'Culture', 'Conflict', 'Network', 'Ethical', 'Emotion', 'Project', 'Critical', 'Decide', 'Initiate', 'Account', 'Detail', 'Plan', 'Resilient', 'Goal', 'Speak', 'Negotiate', 'Research', 'Delegate', 'Risk', 'Patient', 'Persuade', 'Analyze', 'Coach', 'Present', 'Build', 'Analyse', 'Time', 'Motivate', 'Innovate', 'Technique', 'Client', 'Sale', 'Coordinate', 'Identify', 'Crisis']
+    for keyword in resume_keywords:
+        if keyword not in job_description_keywords and keyword not in skills:
+            extra_keywords.append(keyword)
+
+    for keyword in resume_keywords:
+        if keyword not in extra_keywords:
+            union.append(keyword)
+
+    confidence_score = (len(union)/len(extra_keywords))*100
+	print(f"confidence score = {confidence_score}")
+    return confidence_score
+
 def read_data_from_pdf(pdf_path):
     with open(pdf_path, 'rb') as file:
         pdf_reader = PyPDF2.PdfReader(file)
@@ -105,3 +121,5 @@ resume_keywords = local_llm(f"You are a ATS service for technical jobs. From the
 print(job_description_keywords)
 print(resume_keywords)
 matcher(job_description_keywords, resume_keywords)
+confidenceScore(resume_keywords, job_description_keywords)
+
