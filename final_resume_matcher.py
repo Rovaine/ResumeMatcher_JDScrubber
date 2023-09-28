@@ -75,8 +75,8 @@ def extract_info_from_pdf(pdf_path):
                 lnks.append(obj["uri"])
     
     extracted_info = []
-    
-    for lnk in lnks:
+    ll=["https://github.com/Biswatosh01/Construction-Site-Safety-"]
+    for lnk in ll:
         github_url = lnk + "/blob/main/README.md"
         url = convert_github_url_to_raw_url(github_url)
 
