@@ -93,3 +93,4 @@ def compare_pdfs(request):
 def results(request):
     similarity_percentage = request.GET.get('similarity_percentage', None)
     return render(request, 'result.html', {'similarity_percentage': similarity_percentage})
+
